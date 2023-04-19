@@ -1,0 +1,17 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    border: 1px solid swhite;
+    padding: 1rem 1rem;
+}
+.header img{
+    width: 8.4rem;
+    height: 2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.header img:hover{
+    transform: scale(1.1);
+}
