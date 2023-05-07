@@ -1,10 +1,12 @@
-import './Banner.css'
+import styled from 'styled-components'
 import banner from "../../assets/images/banner.jpg"
 
+
+const StyledImg = styled.img`
+max-width: 100%;
+`
 const Banner = () =>{
-    return (
-        <img src={banner} alt="banner" />
-    )
+    return <StyledImg primary src={banner} alt="banner" />
 }
 
 export default Banner

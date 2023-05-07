@@ -1,0 +1,23 @@
+{
+    "videos": [
+      {
+        "video_link": "https://www.youtube.com/watch?v=abc123",
+        "miniatura_link": "https://www.example.com/thumbnail.jpg",
+        "title": "Video 1",
+        "description": "Descripción del video 1."
+      },
+      {
+        "video_link": "https://www.youtube.com/watch?v=def456",
+        "miniatura_link": "https://www.example.com/thumbnail2.jpg",
+        "title": "Video 2",
+        "description": "Descripción del video 2."
+      },
+      {
+        "video_link": "https://www.youtube.com/watch?v=ghi789",
+        "miniatura_link": "https://www.example.com/thumbnail3.jpg",
+        "title": "Video 3",
+        "description": "Descripción del video 3."
+      }
+    ]
+  }
+  

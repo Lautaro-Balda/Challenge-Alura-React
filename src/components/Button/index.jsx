@@ -1,11 +1,26 @@
-import './Button.css'
+import styled from "styled-components"
+import { fuenteTitulos, colorPrimario } from "../UI/variables"
+import { Btn } from "../UI";
 
-const Button = (props) =>{
+const StyledButton = styled(Btn)`
+    width: 9rem;
+    height: 2.3rem;
+    color: white;
+    font-family: ${fuenteTitulos};
+    font-size: 1.2rem;
+    letter-spacing: .2rem;
+    line-height: 2.3rem;
+    &:hover{
+    border-color: ${colorPrimario};
+    color: ${colorPrimario}
+    }
+`
 
-    const {texto} = props
-    return <button className='button'>
+const Button = ({texto}) =>{
+    
+    return <StyledButton className='button'>
         {texto}
-    </button>
+    </StyledButton>
 }
 
 export default Button
