@@ -3,6 +3,7 @@ import { Btn, TituloFormulario, TextArea } from "../UI"
 import styled from "styled-components"
 import { colorPrimario } from "../UI/variables"
 import { useLocation, Link } from "react-router-dom"
+import { useState } from "react"
 
 const StyledMain = styled.main`
 display: flex;
@@ -33,19 +34,34 @@ margin-top: 2rem;
 `
 const FormularioVideo = ({titulo}) =>{
     const location = useLocation();
+
+    const [tituloVideo, setTitulo] = useState("")
+    const [linkVideo, setLinkVideo] = useState("")
+    const [linkImagen, setLinkImagen] = useState("")
+    const [descripcion, setDescripcion] = useState("")
+    const [codigo, setCodigo] = useState("")
     return <StyledMain>
         <TituloFormulario>{titulo}</TituloFormulario>
-        <StyledForm>
+        <StyledForm onSubmit={(e) => {
+            e.preventDefault()
+            
+        }}>
             <Campo 
             titulo="Titulo"
+            value={tituloVideo}
+            actualizarValor={setTitulo}
             />
             <Campo 
             titulo="Link del video"
             type="url"
+            value={linkVideo}
+            actualizarValor={setLinkVideo}
             />
             <Campo 
             titulo="Link imagen del video"
             type="url"
+            value={linkImagen}
+            actualizarValor={setLinkImagen}
             />
 
             {/* selectDecategoria */}
@@ -53,16 +69,19 @@ const FormularioVideo = ({titulo}) =>{
             <TextArea 
             titulo="Descripción" 
             rows={5} 
+            value={descripcion}
+            actualizarValor={setDescripcion}
             />
 
             <Campo 
             titulo="Código de seguridad"
             type="password"
-
+            value={codigo}
+            actualizarValor={setCodigo}
             />
             <StyledDiv>
                 <div>
-                    <StyledBtn primary>Guardar</StyledBtn>
+                    <StyledBtn primary type="submit">Guardar</StyledBtn>
                     <StyledBtn>Limpiar</StyledBtn>
                 </div>
                 <div>

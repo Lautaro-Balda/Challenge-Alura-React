@@ -3,6 +3,8 @@ import { Btn, TextArea, TituloFormulario } from "../UI"
 import styled from "styled-components"
 import { colorPrimario } from "../UI/variables"
 import { useLocation, Link } from "react-router-dom"
+import { useState } from "react"
+
 
 const StyledMain = styled.main`
 display: flex;
@@ -33,16 +35,25 @@ margin-top: 2rem;
 `
 const FormularioVideo = ({titulo}) =>{
     const location = useLocation();
+    const [nombre,setNombre] = useState("")
+    const [descripcion, setDescripcion] = useState("")
+    const [color, setColor] = useState("")
+    const [codigo, setCodigo] = useState("")
+
+    
     return <StyledMain>
         <TituloFormulario>{titulo}</TituloFormulario>
         <StyledForm>
             <Campo 
             titulo="Nombre"
-
+            value={nombre}
+            actualizarValor={setNombre}
             />
             <TextArea 
             titulo="Descripcion"
             rows={5} 
+            value={descripcion}
+            actualizarValor={setDescripcion}
             />
 
             {/* selectDecategoria */}
@@ -51,11 +62,15 @@ const FormularioVideo = ({titulo}) =>{
             color
             titulo="Color" 
             type="color"
+            value={color}
+            actualizarValor={setColor}
             />
 
             <Campo 
             titulo="Código de seguridad"
             type="password"
+            value={codigo}
+            actualizarValor={setCodigo}
             />
             <StyledDiv>
                 <div>

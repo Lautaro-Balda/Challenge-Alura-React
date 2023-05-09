@@ -16,9 +16,9 @@ const StyledButton = styled(Btn)`
     }
 `
 
-const Button = ({texto}) =>{
+const Button = ({texto, type}) =>{
     
-    return <StyledButton className='button'>
+    return <StyledButton className='button' type={type}>
         {texto}
     </StyledButton>
 }

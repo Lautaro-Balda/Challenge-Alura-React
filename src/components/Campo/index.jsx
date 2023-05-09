@@ -40,13 +40,17 @@ const StyledInput = styled.input`
   }
 `
 
-const Campo = ({titulo, type, autocomplete, color}) =>{
+const Campo = ({titulo, type, color, value, actualizarValor}) =>{
+  const handleChange = (e) =>{
+    actualizarValor(e.target.value)
+  }
   return (
     <StyledDiv color={color}>
       <StyledLabel>{titulo}</StyledLabel>
       <StyledInput 
         type={type}
-        autocomplete={autocomplete}
+        value={value}
+        onChange={handleChange}
       />
     </StyledDiv>
   )

@@ -1,11 +1,12 @@
-
 import MiCarousel from "../carrusel/Carrusel"
 import VideoCard from "../carrusel/VideoCard"
 import Banner from "../components/Banner"
 import AcercaDe from "../components/acercaDe"
 import styled from "styled-components"
 import { colorDeFondo } from "../components/UI/variables"
-
+import CategoriasVideos from "../components/CategoríasVideos"
+import { CounterContext } from "../Context";
+import { useContext } from "react";
 
 const StyledSection = styled.section`
 display: flex;
@@ -22,18 +23,26 @@ background-color: transparent;
 const StyledSectionVideos = styled.section`
 position: relative;
 background-color: ${colorDeFondo};
+padding-left: 2rem;
+`
+const StyledSectionCategorias = styled.section`
+position: relative;
+background-color: ${colorDeFondo};
 display: flex;
 flex-direction: column;
-gap: 2rem;
+gap: 1rem;
+padding-left: 2rem;
 `
 const StyledvDivVideos = styled.div`
 position: relative;
 top: -60px;
 background-color: transparent;
-margin-left: 2rem;
 `
 
 const Home = () =>{
+    
+    const CounterData = useContext(CounterContext)
+
     return <main>
         <section>
             <Banner/>
@@ -44,12 +53,12 @@ const Home = () =>{
         </section>
         <StyledSectionVideos>
             <StyledvDivVideos>
-                <VideoCard/>
-            </StyledvDivVideos>
-            <StyledvDivVideos>
-                <VideoCard/>
+                <VideoCard videos={CounterData.videos} color="lightblue"/>
             </StyledvDivVideos>
         </StyledSectionVideos>
+        <StyledSectionCategorias>
+            <CategoriasVideos/>
+        </StyledSectionCategorias>
     </main>
 }
 

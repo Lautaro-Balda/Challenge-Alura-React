@@ -1,22 +1,114 @@
 {
     "videos": [
       {
-        "video_link": "https://www.youtube.com/watch?v=abc123",
-        "miniatura_link": "https://www.example.com/thumbnail.jpg",
-        "title": "Video 1",
-        "description": "Descripción del video 1."
+        "id": 1,
+        "video_link": "#",
+        "miniatura_link": "https://p4.wallpaperbetter.com/wallpaper/966/173/211/hunter-x-hunter-hisoka-wallpaper-preview.jpg",
+        "titulo": "Video 1",
+        "description": "Descripción del video 1.",
+        "categoria": "Back End"
       },
       {
-        "video_link": "https://www.youtube.com/watch?v=def456",
-        "miniatura_link": "https://www.example.com/thumbnail2.jpg",
-        "title": "Video 2",
-        "description": "Descripción del video 2."
+        "id": 2,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6371/cccbfc652661d64470a38a1e302ffc6a3ecbf470_hq.jpg",
+        "titulo": "Video 2",
+        "description": "Descripción del video 2.",
+        "categoria": "Innovación y Gestión"
       },
       {
-        "video_link": "https://www.youtube.com/watch?v=ghi789",
-        "miniatura_link": "https://www.example.com/thumbnail3.jpg",
-        "title": "Video 3",
-        "description": "Descripción del video 3."
+        "id": 3,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6493/6cb128d9b593b37fec9c5e030871d688718d5418_hq.jpg",
+        "titulo": "Video 3",
+        "description": "Descripción del video 3.",
+        "categoria": "Back End"
+      },
+      {
+        "id": 1,
+        "video_link": "#",
+        "miniatura_link": "https://p4.wallpaperbetter.com/wallpaper/966/173/211/hunter-x-hunter-hisoka-wallpaper-preview.jpg",
+        "titulo": "Video 1",
+        "description": "Descripción del video 1.",
+        "categoria": "Back End"
+      },
+      {
+        "id": 2,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6371/cccbfc652661d64470a38a1e302ffc6a3ecbf470_hq.jpg",
+        "titulo": "Video 2",
+        "description": "Descripción del video 2.",
+        "categoria": "Innovación y Gestión"
+      },
+      {
+        "id": 3,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6493/6cb128d9b593b37fec9c5e030871d688718d5418_hq.jpg",
+        "titulo": "Video 3",
+        "description": "Descripción del video 3.",
+        "categoria": "Back End"
+      },
+      {
+        "id": 1,
+        "video_link": "#",
+        "miniatura_link": "https://p4.wallpaperbetter.com/wallpaper/966/173/211/hunter-x-hunter-hisoka-wallpaper-preview.jpg",
+        "titulo": "Video 1",
+        "description": "Descripción del video 1.",
+        "categoria": "Back End"
+      },
+      {
+        "id": 2,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6371/cccbfc652661d64470a38a1e302ffc6a3ecbf470_hq.jpg",
+        "titulo": "Video 2",
+        "description": "Descripción del video 2.",
+        "categoria": "Innovación y Gestión"
+      },
+      {
+        "id": 3,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6493/6cb128d9b593b37fec9c5e030871d688718d5418_hq.jpg",
+        "titulo": "Video 3",
+        "description": "Descripción del video 3.",
+        "categoria": "Back End"
+      },
+      {
+        "id": 2,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6371/cccbfc652661d64470a38a1e302ffc6a3ecbf470_hq.jpg",
+        "titulo": "Video 2",
+        "description": "Descripción del video 2.",
+        "categoria": "Innovación y Gestión"
+      },
+            {
+        "id": 2,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6371/cccbfc652661d64470a38a1e302ffc6a3ecbf470_hq.jpg",
+        "titulo": "Video 2",
+        "description": "Descripción del video 2.",
+        "categoria": "Innovación y Gestión"
+      },
+            {
+        "id": 2,
+        "video_link": "#",
+        "miniatura_link": "https://pm1.narvii.com/6371/cccbfc652661d64470a38a1e302ffc6a3ecbf470_hq.jpg",
+        "titulo": "Video 2",
+        "description": "Descripción del video 2.",
+        "categoria": "Innovación y Gestión"
+      }
+    ],
+    "categorias": [
+      {
+        "id": "backend",
+        "titulo": "Back End",
+        "subtitulo": "Formación Back end de Alura Latam",
+        "color": "#00c86f"
+      },
+      {
+        "id": "innovacion/gestion",
+        "titulo": "Innovación y Gestión",
+        "subtitulo": "Formación Innovación y Gestión de Alura Latam",
+        "color": "#fe8c2a"
       }
     ]
   }
