@@ -1,9 +1,14 @@
+import axios from 'axios';
 import Campo from "../Campo"
 import { Btn, TituloFormulario, TextArea } from "../UI"
 import styled from "styled-components"
 import { colorPrimario } from "../UI/variables"
 import { useLocation, Link } from "react-router-dom"
 import { useState } from "react"
+import {CounterContext} from "../../Context"
+import { useContext } from "react";
+import ListaOpciones from '../ListaOpciones';
+import { v4 as uuid } from 'uuid';
 
 const StyledMain = styled.main`
 display: flex;
@@ -36,15 +41,37 @@ const FormularioVideo = ({titulo}) =>{
     const location = useLocation();
 
     const [tituloVideo, setTitulo] = useState("")
-    const [linkVideo, setLinkVideo] = useState("")
-    const [linkImagen, setLinkImagen] = useState("")
+    const [video_link, setvideo_link] = useState("")
+    const [miniatura_link, setminiatura_link] = useState("")
     const [descripcion, setDescripcion] = useState("")
+    const [categoria, setCategoria] = useState("")
     const [codigo, setCodigo] = useState("")
+    const [id, setId] = useState(uuid())
+    const CounterData = useContext(CounterContext)
+
+    const enviarDatos = async () =>{
+        const nuevoVideo = {tituloVideo, video_link, miniatura_link, categoria, descripcion, id};
+        try {
+          const respuesta = await axios.post('http://localhost:4000/videos', nuevoVideo);
+          if (respuesta.status === 201) {
+            CounterData.setVideos([...CounterData.videos, respuesta.data]);
+          }
+        } catch (error) {
+          console.error('Error al crear el video:', error);
+        }
+    }     
+    const limpiarInputs = () =>{
+        setTitulo("")
+        setvideo_link("")
+        setminiatura_link("")
+        setDescripcion("")
+        setCategoria("")
+    }
     return <StyledMain>
         <TituloFormulario>{titulo}</TituloFormulario>
         <StyledForm onSubmit={(e) => {
             e.preventDefault()
-            
+            enviarDatos()
         }}>
             <Campo 
             titulo="Titulo"
@@ -54,14 +81,14 @@ const FormularioVideo = ({titulo}) =>{
             <Campo 
             titulo="Link del video"
             type="url"
-            value={linkVideo}
-            actualizarValor={setLinkVideo}
+            value={video_link}
+            actualizarValor={setvideo_link}
             />
             <Campo 
             titulo="Link imagen del video"
             type="url"
-            value={linkImagen}
-            actualizarValor={setLinkImagen}
+            value={miniatura_link}
+            actualizarValor={setminiatura_link}
             />
 
             {/* selectDecategoria */}
@@ -73,6 +100,12 @@ const FormularioVideo = ({titulo}) =>{
             actualizarValor={setDescripcion}
             />
 
+            <ListaOpciones 
+            value={categoria}
+            actualizarValor={setCategoria}
+            categorias={CounterData.categorias.map((categoria) => categoria)}
+            />
+
             <Campo 
             titulo="Código de seguridad"
             type="password"
@@ -82,7 +115,7 @@ const FormularioVideo = ({titulo}) =>{
             <StyledDiv>
                 <div>
                     <StyledBtn primary type="submit">Guardar</StyledBtn>
-                    <StyledBtn>Limpiar</StyledBtn>
+                    <StyledBtn onClick={() => limpiarInputs()}>Limpiar</StyledBtn>
                 </div>
                 <div>
                     { location.pathname === "/Nuevo_video" && <Link to="/Nueva_Categoria"><StyledBtn className="nueva-categoria" primary>Nueva Categoría</StyledBtn></Link>}

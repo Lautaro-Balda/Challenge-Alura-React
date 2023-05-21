@@ -2,7 +2,6 @@ import { colorPrimario, fuenteTitulos, fuenteTexto, inputColor } from "./variabl
 import styled from "styled-components"
 
 export const Btn = styled.button`
-background-color: black;
 border: 2px solid white;
 border-radius: 5px;
 cursor: pointer;
@@ -47,12 +46,17 @@ const StyledTextArea = styled.textarea`
     outline: none;
   }
 `
-export const TextArea = ({titulo, rows}) =>{
+export const TextArea = ({titulo, value, actualizarValor, rows}) =>{
+  const handleChange = (e) =>{
+    actualizarValor(e.target.value)
+  }
     return (
         <StyledDiv>
             <StyledLabel>{titulo}</StyledLabel>
             <StyledTextArea 
             rows={rows}
+            value={value}
+            onChange={handleChange}
             />
         </StyledDiv>
     )

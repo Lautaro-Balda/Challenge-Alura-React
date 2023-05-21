@@ -39,7 +39,6 @@ const StyledInput = styled.input`
     outline: none;
   }
 `
-
 const Campo = ({titulo, type, color, value, actualizarValor}) =>{
   const handleChange = (e) =>{
     actualizarValor(e.target.value)

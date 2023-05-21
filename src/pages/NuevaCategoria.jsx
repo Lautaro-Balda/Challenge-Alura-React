@@ -4,7 +4,7 @@ import ListaCategorias from "../components/ListaCategorias";
 const NuevaCategoria = () => {
     return (
         <section>
-            <FormularioCategoria titulo="Nueva Categoria"/>
+            <FormularioCategoria tituloForm="Nueva Categoria"/>
             <ListaCategorias />
         </section>
 

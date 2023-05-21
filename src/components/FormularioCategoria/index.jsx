@@ -1,9 +1,13 @@
+import axios from 'axios';
 import Campo from "../Campo"
 import { Btn, TextArea, TituloFormulario } from "../UI"
 import styled from "styled-components"
 import { colorPrimario } from "../UI/variables"
 import { useLocation, Link } from "react-router-dom"
 import { useState } from "react"
+import {CounterContext} from "../../Context"
+import { useContext } from "react";
+import { v4 as uuid } from 'uuid';
 
 
 const StyledMain = styled.main`
@@ -33,27 +37,49 @@ margin-top: 2rem;
     justify-self: end;
 }
 `
-const FormularioVideo = ({titulo}) =>{
+const FormularioVideo = ({tituloForm}) =>{
     const location = useLocation();
-    const [nombre,setNombre] = useState("")
-    const [descripcion, setDescripcion] = useState("")
+    const [titulo,setTitulo] = useState("")
+    const [subtitulo, setSubtitulo] = useState("")
     const [color, setColor] = useState("")
     const [codigo, setCodigo] = useState("")
 
-    
+    const CounterData = useContext(CounterContext)
+    const enviarDatos = async () =>{
+        const nuevaCategoria = {titulo, color, subtitulo, id: uuid()};
+        try {
+          const respuesta = await axios.post('http://localhost:4000/categorias', nuevaCategoria);
+          if (respuesta.status === 201) {
+            CounterData.setCategorias([...CounterData.categorias, respuesta.data]);
+          }
+        } catch (error) {
+          console.error('Error al crear la categoría:', error);
+        }
+    }
+    const limpiarInputs = () =>{
+        setTitulo("")
+        setSubtitulo("")
+        setColor("")
+        setCodigo("")
+    }
     return <StyledMain>
-        <TituloFormulario>{titulo}</TituloFormulario>
-        <StyledForm>
+        <TituloFormulario>{tituloForm}</TituloFormulario>
+        <StyledForm onSubmit={
+            (e) => {
+                e.preventDefault();
+                enviarDatos();
+            }
+        }>
             <Campo 
             titulo="Nombre"
-            value={nombre}
-            actualizarValor={setNombre}
+            value={titulo}
+            actualizarValor={setTitulo}
             />
             <TextArea 
             titulo="Descripcion"
             rows={5} 
-            value={descripcion}
-            actualizarValor={setDescripcion}
+            value={subtitulo}
+            actualizarValor={setSubtitulo}
             />
 
             {/* selectDecategoria */}
@@ -74,8 +100,8 @@ const FormularioVideo = ({titulo}) =>{
             />
             <StyledDiv>
                 <div>
-                    <StyledBtn primary>Guardar</StyledBtn>
-                    <StyledBtn>Limpiar</StyledBtn>
+                    <StyledBtn primary type="submit">Guardar</StyledBtn>
+                    <StyledBtn onClick={() => limpiarInputs()}>Limpiar</StyledBtn>
                 </div>
                 <div>
                     { location.pathname === "/Nuevo_video" && <Link to="/Nueva_Categoria"><StyledBtn className="nueva-categoria" primary>Nueva Categoría</StyledBtn></Link>}

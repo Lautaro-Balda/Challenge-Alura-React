@@ -18,34 +18,37 @@ h3{
     color: #8a8a8a;
     font-size: .9rem;
     margin-left: 1rem;
+    width: 60%;
 }
 `
 
 
 const CategoriasVideos = () => {
+    const CounterData = useContext(CounterContext);
 
-    const CounterData = useContext(CounterContext)
+    const categoriasConVideos = CounterData.categorias.filter(categoria =>
+        CounterData.videos.some(video => video.categoria === categoria.titulo)
+    );
     return (
         <>
-        {/* {console.log(CounterData.videos.filter(video => video.categoria === "Back End"))} */}
-        {
-            CounterData.categorias.map(categoria => 
+            {categoriasConVideos.map(categoria => (
                 <div key={categoria.id}>
-                <StyledDiv>
-                    <h2 style={{backgroundColor: categoria.color}}>{categoria.titulo}</h2>
-                    <h3>{categoria.subtitulo}</h3>
-                </StyledDiv>
-                <div>
-                    <VideoCard videos={CounterData.videos.filter(video => video.categoria === categoria.titulo)} color={categoria.color}/>
+                    <StyledDiv>
+                        <h2 style={{backgroundColor: categoria.color}}>{categoria.titulo}</h2>
+                        <h3>{categoria.subtitulo}</h3>
+                    </StyledDiv>
+                    <div>
+                        <VideoCard
+                            CounterData={CounterData}
+                            videos={CounterData.videos.filter(video => video.categoria === categoria.titulo)}
+                            color={categoria.color}
+                        />
+                    </div>
                 </div>
-                </div>
-            )
-        }
+            ))}
         </>
+    );
+};
 
-    )
-
-
-}
 
 export default CategoriasVideos

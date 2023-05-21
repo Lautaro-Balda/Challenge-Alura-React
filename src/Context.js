@@ -8,16 +8,41 @@ export const ContextProvider = ({children}) => {
 
     const [categorias, setCategorias] = useState([])
     const [videos, setVideos] = useState([])
+    const [video, setVideo] = useState(null)
+    const [colorCategoria, setColor] = useState(null)
+
+    const videosConCategorias = videos.filter(video =>
+        categorias.some(categoria => video.categoria === categoria.titulo)
+    );
+
+
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * videosConCategorias.length);
+        const selectedVideo = videosConCategorias[randomIndex];
+        setVideo(selectedVideo);
+    }, [videos]);
+
+    useEffect(() => {
+        const categoria = categorias.find(categoria => categoria.titulo === video?.categoria)
+        setColor(categoria?.color || null)
+        }, [video])
+
     
+    
+
     useEffect(() => {
         buscar(`/categorias`, setCategorias)
         buscar(`/videos`, setVideos)
     }, [])
     const values = {
         categorias,
-        videos
-
-
+        videos,
+        setCategorias,
+        setVideos,
+        setVideo,
+        video,
+        colorCategoria,
+        videosConCategorias
     }
 
     return (

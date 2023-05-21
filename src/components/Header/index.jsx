@@ -1,7 +1,8 @@
-import Button from '../Button'
+import {Btn} from '../UI/index'
 import logo from "../../assets/images/logo.png"
 import styled from 'styled-components'
 import { useLocation, Link } from 'react-router-dom'
+import { colorPrimario, fuenteTitulos } from '../UI/variables'
 
 const StyledHeader = styled.header`
     display: flex;
@@ -11,7 +12,16 @@ const StyledHeader = styled.header`
     border: 1px solid swhite;
     padding: .6rem 1rem;
 `
-
+const StyledBtn = styled(Btn)`
+background-color: ${colorPrimario};
+color: white;
+padding: .6rem 1rem;
+font-family: ${fuenteTitulos};
+letter-spacing: .1rem;
+&:hover{
+    border-color: ${colorPrimario};
+}
+`
 const StyledImg = styled.img`
     width: 8.4rem;
     height: 2rem;
@@ -21,7 +31,6 @@ const StyledImg = styled.img`
         transform: scale(1.1);
     }
 `
- 
 const Header = () =>{
 
     const location = useLocation();
@@ -29,7 +38,7 @@ const Header = () =>{
     return (
         <StyledHeader>
             <Link to="/"><StyledImg src={logo} alt="logo" /></Link>
-            {location.pathname === "/" && <Link to="/Nuevo_video"><Button texto="Nuevo video"/></Link>}
+            {location.pathname === "/" && <Link to="/Nuevo_video"><StyledBtn>Nuevo video</StyledBtn></Link>}
         </StyledHeader>
     )
 }
