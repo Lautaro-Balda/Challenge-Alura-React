@@ -1,7 +1,7 @@
 import Campo from "../Campo"
 import styled from "styled-components"
 import { Btn } from "../UI"
-import { colorPrimario, fuenteTitulos} from "../UI/variables"
+import { colorPrimario, fuenteTitulos } from "../UI/variables"
 import { useState } from "react"
 import axios from "axios"
 import { useContext } from "react"
@@ -45,7 +45,7 @@ font-size: .9rem;
 width: 60%;
 text-align: center;
 `
-const EditarCategoria = ({setMostrar, categoriaTitulo, categoriaSubtitulo , categoriaColor, categoriaId}) => {
+const EditarCategoria = ({ setMostrar, categoriaTitulo, categoriaSubtitulo, categoriaColor, categoriaId }) => {
     const CounterData = useContext(CounterContext)
     const tituloInicial = categoriaTitulo
     const subTituloInicial = categoriaSubtitulo
@@ -57,29 +57,29 @@ const EditarCategoria = ({setMostrar, categoriaTitulo, categoriaSubtitulo , cate
 
     const editarCategoria = async (categoriaId) => {
         try {
-            const respuesta = await axios.get(`http://localhost:4000/categorias/${categoriaId}`); 
-            if(respuesta.status === 200){
+            const respuesta = await axios.get(`https://my-json-server.typicode.com/Lautaro-Balda/datosAlura/categorias/${categoriaId}`);
+            if (respuesta.status === 200) {
                 const categoria = respuesta.data
                 categoria.titulo = titulo
                 categoria.subtitulo = subtitulo
-                axios.put(`http://localhost:4000/categorias/${categoriaId}`, categoria)
+                axios.put(`https://my-json-server.typicode.com/Lautaro-Balda/datosAlura/categorias/${categoriaId}`, categoria)
                 CounterData.setCategorias(prevCategorias => {
                     const categoriasActualizadas = prevCategorias.map(prevCategoria => {
                         if (prevCategoria.id === categoriaId) {
                             return categoria
                         } else {
-                        return prevCategoria
-                    }
+                            return prevCategoria
+                        }
                     });
-                        return categoriasActualizadas
-                    });
-            } else{
+                    return categoriasActualizadas
+                });
+            } else {
                 console.log("no es por acá", respuesta.status)
             }
         } catch (error) {
             console.error('Error al editar la categoría:', error);
         }
-    } 
+    }
     const manejarEnvio = () => {
         editarCategoria(idCategoria)
     }
@@ -87,28 +87,28 @@ const EditarCategoria = ({setMostrar, categoriaTitulo, categoriaSubtitulo , cate
     return (
         <>
             {
-                titulo != "" && <StyledH3 style={{backgroundColor: categoriaColor}}>{titulo}</StyledH3>
+                titulo != "" && <StyledH3 style={{ backgroundColor: categoriaColor }}>{titulo}</StyledH3>
             }
             {
                 subtitulo != "" && <StyledH4>{subtitulo}</StyledH4>
             }
             <form type="submit"
-            style={{
-                width: "80%",
-            }}
-            onSubmit={(e) => {
-                e.preventDefault()
-                manejarEnvio()
-            }}>
-                <Campo 
-                titulo={"Edita el nombre de la categoria aqui"} 
-                value={titulo} 
-                actualizarValor={setTitulo}
+                style={{
+                    width: "80%",
+                }}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    manejarEnvio()
+                }}>
+                <Campo
+                    titulo={"Edita el nombre de la categoria aqui"}
+                    value={titulo}
+                    actualizarValor={setTitulo}
                 />
-                <Campo 
-                titulo={"Edita la descripción de la categoria aqui"} 
-                value={subtitulo} 
-                actualizarValor={setSubtitulo}
+                <Campo
+                    titulo={"Edita la descripción de la categoria aqui"}
+                    value={subtitulo}
+                    actualizarValor={setSubtitulo}
                 />
                 <StyledDiv className="editar-buttons">
                     <StyledBtnEditar type="button" className="btn-cancelar" onClick={() => setMostrar(false)}>Cancelar</StyledBtnEditar>
@@ -117,7 +117,7 @@ const EditarCategoria = ({setMostrar, categoriaTitulo, categoriaSubtitulo , cate
             </form>
         </>
 
-        
+
     )
 }
 

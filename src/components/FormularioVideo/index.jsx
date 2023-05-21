@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { colorPrimario } from "../UI/variables"
 import { useLocation, Link } from "react-router-dom"
 import { useState } from "react"
-import {CounterContext} from "../../Context"
+import { CounterContext } from "../../Context"
 import { useContext } from "react";
 import ListaOpciones from '../ListaOpciones';
 import { v4 as uuid } from 'uuid';
@@ -29,15 +29,15 @@ width: 100%;
 const StyledBtn = styled(Btn)`
 width: 9rem;
 height: 2.7rem;
-color: ${ ({primary}) => primary ? "white" : "black" };
-background-color: ${ ({primary}) => primary ? colorPrimario : "#9E9E9E" };
-margin-left: ${({primary}) => primary ? "0" : "2rem"};
+color: ${({ primary }) => primary ? "white" : "black"};
+background-color: ${({ primary }) => primary ? colorPrimario : "#9E9E9E"};
+margin-left: ${({ primary }) => primary ? "0" : "2rem"};
 margin-top: 2rem;
 .nueva-categoria{
     justify-self: end;
 }
 `
-const FormularioVideo = ({titulo}) =>{
+const FormularioVideo = ({ titulo }) => {
     const location = useLocation();
 
     const [tituloVideo, setTitulo] = useState("")
@@ -49,18 +49,18 @@ const FormularioVideo = ({titulo}) =>{
     const [id, setId] = useState(uuid())
     const CounterData = useContext(CounterContext)
 
-    const enviarDatos = async () =>{
-        const nuevoVideo = {tituloVideo, video_link, miniatura_link, categoria, descripcion, id};
+    const enviarDatos = async () => {
+        const nuevoVideo = { tituloVideo, video_link, miniatura_link, categoria, descripcion, id };
         try {
-          const respuesta = await axios.post('http://localhost:4000/videos', nuevoVideo);
-          if (respuesta.status === 201) {
-            CounterData.setVideos([...CounterData.videos, respuesta.data]);
-          }
+            const respuesta = await axios.post('https://my-json-server.typicode.com/Lautaro-Balda/datosAlura/videos', nuevoVideo);
+            if (respuesta.status === 201) {
+                CounterData.setVideos([...CounterData.videos, respuesta.data]);
+            }
         } catch (error) {
-          console.error('Error al crear el video:', error);
+            console.error('Error al crear el video:', error);
         }
-    }     
-    const limpiarInputs = () =>{
+    }
+    const limpiarInputs = () => {
         setTitulo("")
         setvideo_link("")
         setminiatura_link("")
@@ -73,44 +73,44 @@ const FormularioVideo = ({titulo}) =>{
             e.preventDefault()
             enviarDatos()
         }}>
-            <Campo 
-            titulo="Titulo"
-            value={tituloVideo}
-            actualizarValor={setTitulo}
+            <Campo
+                titulo="Titulo"
+                value={tituloVideo}
+                actualizarValor={setTitulo}
             />
-            <Campo 
-            titulo="Link del video"
-            type="url"
-            value={video_link}
-            actualizarValor={setvideo_link}
+            <Campo
+                titulo="Link del video"
+                type="url"
+                value={video_link}
+                actualizarValor={setvideo_link}
             />
-            <Campo 
-            titulo="Link imagen del video"
-            type="url"
-            value={miniatura_link}
-            actualizarValor={setminiatura_link}
+            <Campo
+                titulo="Link imagen del video"
+                type="url"
+                value={miniatura_link}
+                actualizarValor={setminiatura_link}
             />
 
             {/* selectDecategoria */}
 
-            <TextArea 
-            titulo="Descripción" 
-            rows={5} 
-            value={descripcion}
-            actualizarValor={setDescripcion}
+            <TextArea
+                titulo="Descripción"
+                rows={5}
+                value={descripcion}
+                actualizarValor={setDescripcion}
             />
 
-            <ListaOpciones 
-            value={categoria}
-            actualizarValor={setCategoria}
-            categorias={CounterData.categorias.map((categoria) => categoria)}
+            <ListaOpciones
+                value={categoria}
+                actualizarValor={setCategoria}
+                categorias={CounterData.categorias.map((categoria) => categoria)}
             />
 
-            <Campo 
-            titulo="Código de seguridad"
-            type="password"
-            value={codigo}
-            actualizarValor={setCodigo}
+            <Campo
+                titulo="Código de seguridad"
+                type="password"
+                value={codigo}
+                actualizarValor={setCodigo}
             />
             <StyledDiv>
                 <div>
@@ -118,10 +118,10 @@ const FormularioVideo = ({titulo}) =>{
                     <StyledBtn onClick={() => limpiarInputs()}>Limpiar</StyledBtn>
                 </div>
                 <div>
-                    { location.pathname === "/Nuevo_video" && <Link to="/Nueva_Categoria"><StyledBtn className="nueva-categoria" primary>Nueva Categoría</StyledBtn></Link>}
+                    {location.pathname === "/Nuevo_video" && <Link to="/Nueva_Categoria"><StyledBtn className="nueva-categoria" primary>Nueva Categoría</StyledBtn></Link>}
                 </div>
             </StyledDiv>
-            
+
 
         </StyledForm>
     </StyledMain>

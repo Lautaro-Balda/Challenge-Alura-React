@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useContext, useState, useEffect } from "react"
 import { CounterContext } from "../../Context"
 import { colorPrimario, fuenteTitulos } from "../UI/variables"
-import {Btn} from "../../components/UI"
+import { Btn } from "../../components/UI"
 import axios from "axios"
 import EditarCategoria from "../EditarCategoria"
 
@@ -54,10 +54,10 @@ const ListaCategorias = () => {
     setColor(categoriaColor)
     setId(categoriaId)
     setSubtitulo(categoriaSubtitulo)
-  } 
+  }
   const eliminarCategoria = async (categoriaId) => {
     try {
-      const respuesta = await axios.delete(`http://localhost:4000/categorias/${categoriaId}`);
+      const respuesta = await axios.delete(`https://my-json-server.typicode.com/Lautaro-Balda/datosAlura/categorias/${categoriaId}`);
       if (respuesta.status === 200) {
         const categoriasActualizadas = CounterData.categorias.filter(categoria => categoria.id !== categoriaId);
         const videosActualizados = CounterData.videos.filter(video => video.categoria !== categoriasActualizadas.titulo);
@@ -83,9 +83,9 @@ const ListaCategorias = () => {
             <td className="td-texto">{categoria.titulo}</td>
             <td className="td-texto">{categoria.subtitulo}</td>
             <td className="td-button">
-              <StyledBtn 
-              type="button" 
-              onClick={() => showEditor(categoria.titulo, categoria.color, categoria.subtitulo , categoria.id)}>Editar</StyledBtn>
+              <StyledBtn
+                type="button"
+                onClick={() => showEditor(categoria.titulo, categoria.color, categoria.subtitulo, categoria.id)}>Editar</StyledBtn>
             </td>
             <td className="td-button">
               <StyledBtn type="button" onClick={() => eliminarCategoria(categoria.id)}>Eliminar</StyledBtn>
@@ -94,12 +94,12 @@ const ListaCategorias = () => {
         ))}
       </table>
       {mostrar && (
-        <EditarCategoria 
-        setMostrar={setMostrar} 
-        categoriaTitulo={categoriaTitulo} 
-        categoriaSubtitulo={categoriaSubtitulo}
-        categoriaColor={categoriaColor} 
-        categoriaId={categoriaId}
+        <EditarCategoria
+          setMostrar={setMostrar}
+          categoriaTitulo={categoriaTitulo}
+          categoriaSubtitulo={categoriaSubtitulo}
+          categoriaColor={categoriaColor}
+          categoriaId={categoriaId}
         />
       )}
     </StyledDiv>

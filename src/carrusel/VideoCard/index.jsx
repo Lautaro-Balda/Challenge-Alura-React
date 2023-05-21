@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import axios from "axios";
-import {BsTrash3, BsBoxArrowInUp} from 'react-icons/bs'
+import { BsTrash3, BsBoxArrowInUp } from 'react-icons/bs'
 import { colorPrimario } from "../../components/UI/variables";
 
 const StyledDiv = styled.div`
@@ -53,7 +53,7 @@ height: 100%;
 
 export default class Responsive extends Component {
   render() {
-    const {videos, color, CounterData} = this.props;
+    const { videos, color, CounterData } = this.props;
     var settings = {
       dots: false,
       arrows: false,
@@ -91,7 +91,7 @@ export default class Responsive extends Component {
     };
     const eliminarVideo = async (videoId) => {
       try {
-        const respuesta = await axios.delete(`http://localhost:4000/videos/${videoId}`)
+        const respuesta = await axios.delete(`https://my-json-server.typicode.com/Lautaro-Balda/datosAlura/videos/${videoId}`)
         if (respuesta.status === 200) {
           const videosActualizados = CounterData.videos.filter(video => video.id !== videoId)
           CounterData.setVideos(videosActualizados);
@@ -109,16 +109,16 @@ export default class Responsive extends Component {
       <StyledDiv>
         <Slider {...settings}>
           {
-          videos?.map(video => (
-            <StyledDivElement key={video.id}>
-            <StyledA href={video.video_link}>
-              <StyledImg src={video.miniatura_link} alt="video" style={{border: `2px solid ${color}`}}
-              />
-            </StyledA>
-            <BsTrash3 onClick={() => eliminarVideo(video.id)} className="trash">Eliminar</BsTrash3>
-            <BsBoxArrowInUp className="arrow" onClick={() => mandarVideo(video)}></BsBoxArrowInUp>
-            </StyledDivElement>
-          ))
+            videos?.map(video => (
+              <StyledDivElement key={video.id}>
+                <StyledA href={video.video_link}>
+                  <StyledImg src={video.miniatura_link} alt="video" style={{ border: `2px solid ${color}` }}
+                  />
+                </StyledA>
+                <BsTrash3 onClick={() => eliminarVideo(video.id)} className="trash">Eliminar</BsTrash3>
+                <BsBoxArrowInUp className="arrow" onClick={() => mandarVideo(video)}></BsBoxArrowInUp>
+              </StyledDivElement>
+            ))
           }
         </Slider>
       </StyledDiv>
